@@ -46,10 +46,10 @@ install the rsa-form plugin:
 
 install the javascript dependencies:
 
-Download then put [jquery.js](http://docs.jquery.com/Downloading_jQuery) jquery.js http://docs.jquery.com/Downloading_jQuery and 
-("jquery.jcryption.js":http://www.jcryption.org/) in your /public/javascripts/ folder
+Download [jquery.js](http://docs.jquery.com/Downloading_jQuery) and 
+[jquery.jcryption.js](http://www.jcryption.org/) then put them in your /public/javascripts/ folder
 
-Then add the following lines to your application.html.erb:
+Add the following lines to your application.html.erb:
 
 	<script src="/javascripts/jquery-1.4.4.js" type="text/javascript"></script> 
 	<script src="/javascripts/jquery.jcryption-1.1.js" type="text/javascript"></script> 
@@ -66,7 +66,9 @@ add the following line to your /config/environment.rb:
 
 Then:
 stop your server
-run: <code>rake gems:install</code>
+
+	rake gems:install
+
 restart your server
 
 Rsa-form login widget
