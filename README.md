@@ -47,7 +47,7 @@ install the rsa-form plugin:
 install the javascript dependencies:
 
 Download then put jquery.js http://docs.jquery.com/Downloading_jQuery and 
-jquery.jcryption.js http://www.jcryption.org/ in your /public/javascripts/ folder
+("jquery.jcryption.js":http://www.jcryption.org/) in your /public/javascripts/ folder
 
 Then add the following lines to your application.html.erb:
 
