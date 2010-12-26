@@ -90,10 +90,11 @@ Add the following to your html header (application.html.erb):
 
 And thats about it. Your controller will receive the data as:
 
-params[:login] and params[:password]
+	params[:login] and params[:password]
 
 Remember to add this line to your controller:
-params.merge!( RsaForm.decrypt_form( params[:jCryption], session[:key_pair])) if params[:jCryption]
+
+	params.merge!( RsaForm.decrypt_form( params[:jCryption], session[:key_pair])) if params[:jCryption]
 
 You can customize the look and feel of the login widget by:
 
