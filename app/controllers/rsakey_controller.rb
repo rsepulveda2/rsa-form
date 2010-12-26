@@ -1,5 +1,5 @@
 class RsakeyController < ApplicationController
- RSALength = 128
+	RSALength = 128
 	
 	def index
 		key_pair = RSA::KeyPair.generate(RSALength)
