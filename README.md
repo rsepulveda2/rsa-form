@@ -54,12 +54,12 @@ jquery.jcryption.js (http://www.jcryption.org/) in your /public/javascripts/ fol
 
 Then add the following lines to your application.html.erb:
 
-<script src="/javascripts/jquery-1.4.4.js" type="text/javascript"></script> 
-<script src="/javascripts/jquery.jcryption-1.1.js" type="text/javascript"></script> 
+	<script src="/javascripts/jquery-1.4.4.js" type="text/javascript"></script> 
+	<script src="/javascripts/jquery.jcryption-1.1.js" type="text/javascript"></script> 
 
 or equivalent 
 
-<%= javascript_include_tag "jquery-1.4.2", "jquery.jcryption-1.1", "application" %>
+	<%= javascript_include_tag "jquery-1.4.2", "jquery.jcryption-1.1", "application" %>
 
 Install the RSA ruby gem:
 
