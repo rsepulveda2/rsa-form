@@ -1,6 +1,6 @@
 = rsa-form
 
-Description goes here.
+Creates encrypted forms submitted using RSA
 
 == Contributing to rsa-form
  
