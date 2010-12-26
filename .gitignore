@@ -1,3 +1,5 @@
+.gitignore
+.document
 # rcov generated
 coverage
 
