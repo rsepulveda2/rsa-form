@@ -15,13 +15,13 @@ module RsaForm
 			dstr = decrypt( encstr, key_pair.private_key.exponent, key_pair.public_key.modulus) 
 			
 			url = dstr[2..-1]
-			puts "decode = [%s] url [%s] checksum [%s]" % [dstr, url, dstr[0,2]]
+#			puts "decode = [%s] url [%s] checksum [%s]" % [dstr, url, dstr[0,2]]
 			
 			sum = 0
 			url.each_byte { |b| sum += b.to_i }
 
 			if dstr[0,2] != ("%x" % [sum & 0xff])
-				puts "checksum mismatch, expected " + dstr[0,2] + " received " + ("%x" % [sum & 0xff])
+#				puts "checksum mismatch, expected " + dstr[0,2] + " received " + ("%x" % [sum & 0xff])
 				return nil
 			end
 			

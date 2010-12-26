@@ -1,4 +1,4 @@
-# When the rsa-form plugin is installed run the rsaform_assets generator
+# When the rsa-form plugin is installed run the rsaform_assets generator 
 begin
 	if defined?(Rails)
 		rails_root = Rails.root
