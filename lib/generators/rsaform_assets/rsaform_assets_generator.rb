@@ -5,9 +5,6 @@ class RsaformAssetsGenerator < Rails::Generator::Base
 
   def manifest
     record do |m|
-#      m.migration_template 'blog_comments_migration.rb', "db/migrate", {:migration_file_name => "create_blog_comments"}
-#      m.sleep 1 # not ideal, but makes sure the timestamps differ
-#			m.file "config/blog_kit.yml", "config/blog_kit.yml"
 			m.file "stylesheets/rsa-form.css", "public/stylesheets/rsa-form.css"
 			m.file "javascripts/rsa-form.js",  "public/javascripts/rsa-form.js"
 			m.file "images/0.png",  "public/images/0.png"
