@@ -11,10 +11,9 @@ credentials (see below).
 Just create a form as usual, then add the following javascript to your page. (Either using <script></script> tags or
 adding it to one of your javascript files such as /javascripts/application.js)
 
-<pre><code>$(document).ready( function(){
-	$("#myencryptedform").jCryption( {getKeysURL:"/rsakey"});
-});
-</code></pre>
+	$(document).ready( function(){
+		$("#myencryptedform").jCryption( {getKeysURL:"/rsakey"});
+	});
 
 where myencryptedform is the id tag associated with your <form>
 
@@ -23,8 +22,7 @@ the form data using the RSA key, and send the encrypted data back to your server
 
 To decode the data on the server side, make the following call in your controller:
 
-<pre><code>params.merge!( RsaForm.decrypt_form( params[:jCryption], session[:key_pair])) if params[:jCryption]
-</code></pre>
+	params.merge!( RsaForm.decrypt_form( params[:jCryption], session[:key_pair])) if params[:jCryption]
 
 This decodes the form data then adds the form data to your params hash:
 
@@ -44,8 +42,7 @@ Installation instructions:
 
 install the rsa-form plugin:
 
-<pre><code>./script/plugin install git:http://github.com/rsepulveda2/rsa-form.git
-</code></pre>
+	./script/plugin install git:http://github.com/rsepulveda2/rsa-form.git
 
 install the javascript dependencies:
 
@@ -64,8 +61,8 @@ or equivalent
 Install the RSA ruby gem:
 
 add the following line to your /config/environment.rb:
-<pre><code>config.gem "rsa"
-</code></pre>
+
+	config.gem "rsa"
 
 Then:
 stop your server
@@ -82,14 +79,12 @@ if the website owner desires. This widget will also use the RSA encryption (as e
 
 To include the login widget to your login webpage, add the following line:
 
-<pre><code><%= render :partial => 'rsa_form/login' %>
-</code></pre>
+	<%= render :partial => 'rsa_form/login' %>
 
 Add the following to your html header (application.html.erb):
 
-<pre><code><link href="/stylesheets/rsa-form.css" media="screen" rel="stylesheet" type="text/css" /> 
-<script src="/javascripts/rsa-form.js" type="text/javascript"></script> 
-</code></pre>
+	<link href="/stylesheets/rsa-form.css" media="screen" rel="stylesheet" type="text/css" /> 
+	<script src="/javascripts/rsa-form.js" type="text/javascript"></script> 
 
 And thats about it. Your controller will receive the data as:
 
@@ -121,6 +116,4 @@ specified input fields (pass unencrypted).
 
 Here is the call to jCryption using a modified version:
 
-<code>
-$(FORMSELECTOR).jCryption( {getKeysURL:"/rsakey", dontEncryptSelector:'[name="authenticity_token"]'});
-</code>
+	$(FORMSELECTOR).jCryption( {getKeysURL:"/rsakey", dontEncryptSelector:'[name="authenticity_token"]'});
