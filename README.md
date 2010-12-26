@@ -95,19 +95,17 @@ params[:login] and params[:password]
 Remember to add this line to your controller:
 params.merge!( RsaForm.decrypt_form( params[:jCryption], session[:key_pair])) if params[:jCryption]
 
-You can customize the look and feel of the login widget by changing the css file: /stylesheets/rsa-form.css
+You can customize the look and feel of the login widget by:
 
-You can replace the key graphics for the keypad by substituting the following files (just use the same names)
-/images/(0.png - 9.png, clr.png, del.png)
+- Change the css file: /stylesheets/rsa-form.css
+- Replace the graphics for the keypad. The following files can be replaced: /images/(0.png - 9.png, clr.png, del.png)
+- Rewrite the widget's html, copy the /vendor/plugins/rsa-form/app/views/rsa_form directory to your /app/views directory.
 
-Or if you would like to totally rewrite the widget's html, copy the:
-/vendor/plugins/rsa-form/app/views/rsa_form directory to your /app/views directory.
+	Make modifications to the /app/views/rsa_form/_login.html.erb file.
 
-Make your modifications to the /app/views/rsa_form/_login.html.erb file.
-
-To avoid breaking the javascript, don't modify the "img" tags, and 
-don't change the id attribute of the password text field tag and the 
-form tag.
+	To avoid breaking the javascript, don't modify the "img" tags, and 
+	don't change the id attribute of the password text field tag and the 
+	form tag.
 
 Issues:
 
