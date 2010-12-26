@@ -70,5 +70,23 @@ module RsaForm
 				return (tmp * tmp) % m
 			end
 		end	
+		
+		def RsaForm.keys
+			keys = []
+			0.upto(11) do |ndx|
+				keys[ndx] = case ndx
+										 when 3: "del.png"
+										 when 7: "clr.png"
+										 else
+												while true
+													str = rand(10).to_s + ".png"
+													break if keys.index(str) == nil
+												end			
+												str											
+										 end
+			end
+			keys
+		end
 	end
+	
 end
