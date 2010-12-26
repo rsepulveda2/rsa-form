@@ -11,11 +11,11 @@ credentials (see below).
 Just create a form as usual, then add the following javascript to your page. (Either using <script></script> tags or
 adding it to one of your javascript files such as /javascripts/application.js)
 
-<code>
+<pre><code>
 $(document).ready( function(){
 	$("#myencryptedform").jCryption( {getKeysURL:"/rsakey"});
 });
-</code>
+</code></pre>
 
 where myencryptedform is the id tag associated with your <form>
 
