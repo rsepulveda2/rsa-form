@@ -24,9 +24,9 @@ the form data using the RSA key, and send the encrypted data back to your server
 
 To decode the data on the server side, make the following call in your controller:
 
-<code>
+<pre><code>
 params.merge!( RsaForm.decrypt_form( params[:jCryption], session[:key_pair])) if params[:jCryption]
-</code>
+</code></pre>
 
 This decodes the form data then adds the form data to your params hash:
 
@@ -45,9 +45,9 @@ unencrypted mode.
 Installation instructions:
 
 install the rsa-form plugin:
-<code>
+<pre><code>
 ./script/plugin install git:http://github.com/rsepulveda2/rsa-form.git
-</code>
+</code></pre>
 
 install the javascript dependencies:
 
@@ -55,22 +55,22 @@ Download then put jquery.js (http://docs.jquery.com/Downloading_jQuery) and
 jquery.jcryption.js (http://www.jcryption.org/) in your /public/javascripts/ folder
 
 Then add the following lines to your application.html.erb:
-<code>
+<pre><code>
 <script src="/javascripts/jquery-1.4.4.js" type="text/javascript"></script> 
 <script src="/javascripts/jquery.jcryption-1.1.js" type="text/javascript"></script> 
-</code>
+</code></pre>
 
 or equivalent 
-<code>
+<pre><code>
 <%= javascript_include_tag "jquery-1.4.2", "jquery.jcryption-1.1", "application" %>
-</code>
+</code></pre>
 
 Install the RSA ruby gem:
 
 add the following line to your /config/environment.rb:
-<code>
+<pre><code>
 config.gem "rsa"
-</code>
+</code></pre>
 
 Then:
 stop your server
@@ -87,16 +87,16 @@ if the website owner desires. This widget will also use the RSA encryption (as e
 
 To include the login widget to your login webpage, add the following line:
 
-<code>
+<pre><code>
 <%= render :partial => 'rsa_form/login' %>
-</code>
+</code></pre>
 
 Add the following to your html header (application.html.erb):
 
-<code>
+<pre><code>
 <link href="/stylesheets/rsa-form.css" media="screen" rel="stylesheet" type="text/css" /> 
 <script src="/javascripts/rsa-form.js" type="text/javascript"></script> 
-</code>
+</code></pre>
 
 And thats about it. Your controller will receive the data as:
 
