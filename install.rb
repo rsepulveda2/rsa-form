@@ -9,8 +9,8 @@ begin
 	end
 
 	if (File.exists?(rails_root) && File.exists?(File.join(rails_root, 'app')))
-#		require "#{rails_root}/config/boot"
-#		require "#{rails_root}/config/environment"
+		require "#{rails_root}/config/boot"
+		require "#{rails_root}/config/environment"
 		require 'rails_generator'
 		require 'rails_generator/scripts/generate'
 	end
