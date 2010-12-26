@@ -5,10 +5,10 @@ Rsa-form is a plugin that allows you to send RSA encrypted form data between you
 useful when transferring sensitive data (i.e. login credentials) and your server doesn't have SSL. NOTE: RSA-form 
 is NOT a replacement for SSL since it doesn't use authentication.
 
-Rsa-form also includes a login widget that can be added to your login page to reduce the chance of a keylogger capturing login 
-credentials (see below).
+Rsa-form also includes a login widget that can be added to your login page to reduce the chance of a keylogger 
+capturing your password (see below for details).
 
-Just create a form as usual, then add the following javascript to your page. (Either using "script" tags or
+Just create a form, then add the following javascript to your page. (Either using "script" tags or
 adding it to one of your javascript files such as /javascripts/application.js)
 
 	jQuery(document).ready(function() {
@@ -17,14 +17,14 @@ adding it to one of your javascript files such as /javascripts/application.js)
 
 where myencryptedform is the id tag associated with your form
 
-When the user submit's the form, the browser will request an RSA public key from the server, then encrypt 
-the form data using the RSA key, and send the encrypted data back to your server.
+When the user submit's the form, the browser will request an RSA public key from the server. jCryption will then encrypt 
+the form data using the RSA key and return the data to the server.
 
 To decode the data on the server side, make the following call in your controller:
 
 	params.merge!( RsaForm.decrypt_form( params[:jCryption], session[:key_pair])) if params[:jCryption]
 
-This decodes the form data then adds the form data to your params hash:
+This decodes the form data and adds it to your params hash. Your controller will work just as before.
 
 How does it work?
 the jCryption plugin does most of the heavy lifting on the browser side. When the user submits the form, jCryption
@@ -38,13 +38,11 @@ performed on the data to verify that the data hasn't changed during transfer.
 If there is a problem with the client running jquery/jcryption, the controller automatically falls back to normal
 unencrypted mode.
 
-Installation instructions:
+**Installation instructions:**
 
 install the rsa-form plugin:
 
-	./script/plugin install git:http://github.com/rsepulveda2/rsa-form.git
-
-install the javascript dependencies:
+  ./script/plugin install git://github.com/rsepulveda2/rsa-form.git
 
 Download [jquery.js](http://docs.jquery.com/Downloading_jQuery) and 
 [jquery.jcryption.js](http://www.jcryption.org/) then put them in your /public/javascripts/ folder
@@ -54,7 +52,7 @@ Add the following lines to your application.html.erb:
 	<script src="/javascripts/jquery-1.4.4.js" type="text/javascript"></script> 
 	<script src="/javascripts/jquery.jcryption-1.1.js" type="text/javascript"></script> 
 
-or equivalent 
+or the equivalent 
 
 	<%= javascript_include_tag "jquery-1.4.2", "jquery.jcryption-1.1", "application" %>
 
@@ -64,7 +62,6 @@ add the following line to your /config/environment.rb:
 
 	config.gem "rsa"
 
-Then:
 stop your server
 
 	rake gems:install
@@ -76,7 +73,7 @@ Rsa-form login widget
 
 The Rsa-form login widget can be added to your login page as a partial. The users password
 is entered using a combination of letters on the keyboard and numbers on a mouse driven numeric keypad. 
-The keypad ordering is changed everytime the page is refreshed. The page can be autorefreshed (by a specified time period)
+The keypad ordering is changed everytime the page is refreshed. The page can be autorefreshed (on a specified time period)
 if the website owner desires. This widget will also use the RSA encryption (as explained above) to add additional safety.
 
 To include the login widget to your login webpage, add the following line:
@@ -98,9 +95,12 @@ Remember to add this line to your controller:
 
 You can customize the look and feel of the login widget by:
 
-- Change the css file: /stylesheets/rsa-form.css
-- Replace the graphics for the keypad. The following files can be replaced: /images/(0.png - 9.png, clr.png, del.png)
-- Rewrite the widget's html, copy the /vendor/plugins/rsa-form/app/views/rsa_form directory to your /app/views directory.
+- Changing the css file: /stylesheets/rsa-form.css
+
+- Replacing the graphics for the keypad. The following files can be replaced: /images/(0.png - 9.png, clr.png, del.png)
+
+- Rewrite the widget's html.
+  Copy the /vendor/plugins/rsa-form/app/views/rsa_form directory to your /app/views directory.
 
 	Make modifications to the /app/views/rsa_form/_login.html.erb file.
 
