@@ -8,7 +8,7 @@ is NOT a replacement for SSL since it doesn't use authentication.
 Rsa-form also includes a login widget that can be added to your login page to reduce the chance of a keylogger capturing login 
 credentials (see below).
 
-Just create a form as usual, then add the following javascript to your page. (Either using **script** tags or
+Just create a form as usual, then add the following javascript to your page. (Either using "script" tags or
 adding it to one of your javascript files such as /javascripts/application.js)
 
 	jQuery(document).ready(function() {
@@ -105,7 +105,7 @@ Or if you would like to totally rewrite the widget's html, copy the:
 
 Make your modifications to the /app/views/rsa_form/_login.html.erb file.
 
-To avoid breaking the javascript, don't modify the **img** tags, and 
+To avoid breaking the javascript, don't modify the "img" tags, and 
 don't change the id attribute of the password text field tag and the 
 form tag.
 
