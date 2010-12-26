@@ -11,8 +11,7 @@ credentials (see below).
 Just create a form as usual, then add the following javascript to your page. (Either using <script></script> tags or
 adding it to one of your javascript files such as /javascripts/application.js)
 
-<pre><code>
-$(document).ready( function(){
+<pre><code>$(document).ready( function(){
 	$("#myencryptedform").jCryption( {getKeysURL:"/rsakey"});
 });
 </code></pre>
@@ -24,8 +23,7 @@ the form data using the RSA key, and send the encrypted data back to your server
 
 To decode the data on the server side, make the following call in your controller:
 
-<pre><code>
-params.merge!( RsaForm.decrypt_form( params[:jCryption], session[:key_pair])) if params[:jCryption]
+<pre><code>params.merge!( RsaForm.decrypt_form( params[:jCryption], session[:key_pair])) if params[:jCryption]
 </code></pre>
 
 This decodes the form data then adds the form data to your params hash:
@@ -45,8 +43,7 @@ unencrypted mode.
 Installation instructions:
 
 install the rsa-form plugin:
-<pre><code>
-./script/plugin install git:http://github.com/rsepulveda2/rsa-form.git
+<pre><code>./script/plugin install git:http://github.com/rsepulveda2/rsa-form.git
 </code></pre>
 
 install the javascript dependencies:
@@ -55,21 +52,18 @@ Download then put jquery.js (http://docs.jquery.com/Downloading_jQuery) and
 jquery.jcryption.js (http://www.jcryption.org/) in your /public/javascripts/ folder
 
 Then add the following lines to your application.html.erb:
-<pre><code>
-<script src="/javascripts/jquery-1.4.4.js" type="text/javascript"></script> 
+<pre><code><script src="/javascripts/jquery-1.4.4.js" type="text/javascript"></script> 
 <script src="/javascripts/jquery.jcryption-1.1.js" type="text/javascript"></script> 
 </code></pre>
 
 or equivalent 
-<pre><code>
-<%= javascript_include_tag "jquery-1.4.2", "jquery.jcryption-1.1", "application" %>
+<pre><code><%= javascript_include_tag "jquery-1.4.2", "jquery.jcryption-1.1", "application" %>
 </code></pre>
 
 Install the RSA ruby gem:
 
 add the following line to your /config/environment.rb:
-<pre><code>
-config.gem "rsa"
+<pre><code>config.gem "rsa"
 </code></pre>
 
 Then:
@@ -87,14 +81,12 @@ if the website owner desires. This widget will also use the RSA encryption (as e
 
 To include the login widget to your login webpage, add the following line:
 
-<pre><code>
-<%= render :partial => 'rsa_form/login' %>
+<pre><code><%= render :partial => 'rsa_form/login' %>
 </code></pre>
 
 Add the following to your html header (application.html.erb):
 
-<pre><code>
-<link href="/stylesheets/rsa-form.css" media="screen" rel="stylesheet" type="text/css" /> 
+<pre><code><link href="/stylesheets/rsa-form.css" media="screen" rel="stylesheet" type="text/css" /> 
 <script src="/javascripts/rsa-form.js" type="text/javascript"></script> 
 </code></pre>
 
