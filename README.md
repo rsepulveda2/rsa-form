@@ -1,14 +1,16 @@
-Rsa-Form																																						Last Update: 12/26/10
+Rsa-Form																																						
 ========
+Last Update: 12/26/10
 
-Rsa-form is a plugin that allows you to send RSA encrypted form data between your client and server. This can be 
-useful when transferring sensitive data (i.e. login credentials) and your server doesn't have SSL. NOTE: RSA-form 
-is NOT a replacement for SSL since it doesn't use authentication.
+Rsa-form is a Ruby on Rails plugin that allows you to send RSA encrypted form data between your client's browser and 
+your server.  This plugin can be useful when submitting sensitive data such as login credentials and your server 
+doesn't have SSL. 
+Please note that Rsa-form is NOT a replacement for SSL since it doesn't use authentication.
 
 Rsa-form also includes a login widget that can be added to your login page to reduce the chance of a keylogger 
 capturing your password (see below for details).
 
-Just create a form, then add the following javascript to your page. (Either using "script" tags or
+Just create a form, then add the following javascript to your page. (Using either "script" tags or
 adding it to one of your javascript files such as /javascripts/application.js)
 
 	jQuery(document).ready(function() {
