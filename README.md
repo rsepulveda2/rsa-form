@@ -1,4 +1,4 @@
-Rsa-Form
+Rsa-Form	Last Update: 12/26/10
 ========
 
 Rsa-form is a plugin that allows you to send RSA encrypted form data between your client and server. This can be 
@@ -8,14 +8,14 @@ is NOT a replacement for SSL since it doesn't use authentication.
 Rsa-form also includes a login widget that can be added to your login page to reduce the chance of a keylogger capturing login 
 credentials (see below).
 
-Just create a form as usual, then add the following javascript to your page. (Either using <script></script> tags or
+Just create a form as usual, then add the following javascript to your page. (Either using **script** tags or
 adding it to one of your javascript files such as /javascripts/application.js)
 
-	$(document).ready( function(){
+	jQuery(document).ready(function() {
 		$("#myencryptedform").jCryption( {getKeysURL:"/rsakey"});
 	});
 
-where myencryptedform is the id tag associated with your <form>
+where myencryptedform is the id tag associated with your form
 
 When the user submit's the form, the browser will request an RSA public key from the server, then encrypt 
 the form data using the RSA key, and send the encrypted data back to your server.
@@ -105,7 +105,7 @@ Or if you would like to totally rewrite the widget's html, copy the:
 
 Make your modifications to the /app/views/rsa_form/_login.html.erb file.
 
-To avoid breaking the javascript, don't modify the <img /> tags, and 
+To avoid breaking the javascript, don't modify the **img** tags, and 
 don't change the id attribute of the password text field tag and the 
 form tag.
 
