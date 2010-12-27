@@ -67,7 +67,12 @@ stop your server
 
 restart your server
 
-Rsa-form login widget
+* Additional notes:
+
+- The default RSA key length is 128 bits. If you wish to change this to something else for added security or
+less load on your server, you can modify the RSALength constant in /vendor/plugins/rsa-form/app/controllers/rsakey_controller.rb
+
+Rsa-form login/registration and individual keypad widget's
 =========================
 
 The Rsa-form login widget can be added to your login page as a partial. The users password
@@ -78,6 +83,15 @@ if desired. This widget will also use the RSA encryption (as explained above) to
 To add the login widget to your login webpage, include the following line:
 
 	<%= render :partial => 'rsa_form/login' %>
+  
+To add the registration widget to your registration webpage, include the following line:  
+  
+	<%= render :partial => 'rsa_form/register' %>
+  
+To add a standalone keypad partials, include the following
+  <%= render :partial => 'rsa_form/password1', :locals => { :name => "user[password]"}  %></p>
+or  
+  <%= render :partial => 'rsa_form/password1' %>
 
 Add the following to your html header (application.html.erb):
 
@@ -104,8 +118,29 @@ You can customize the look and feel of the login widget by:
 	Make modifications to the /app/views/rsa_form/_login.html.erb file.
 
 	To avoid breaking the javascript, don't modify the "img" elements, and 
-	don't change the id attribute of the password text field tag and the 
-	form tag.
+	don't change the id attribute of the password text field tag.
+  
+Here is an example of using the individual keypad partials
+ 
+<pre><code><% form_tag users_path,:id=>"rsa_register_form" do -%>
+
+  <%= label_tag 'login' %>
+  <%= text_field_tag 'user[login]' %>
+
+  <%= label_tag 'email' %>
+  <%= text_field_tag 'user[email]' %>
+
+  <%= label_tag 'password' %>
+  <%= render :partial => 'rsa_form/password1', :locals => { :name => "user[password]"}  %>
+
+  <%= label_tag 'password_confirmation' %>
+  <%= render :partial => 'rsa_form/password2', :locals => { :name => "user[password_confirmation]"} %>
+
+  <%= submit_tag 'Sign up' %>
+<% end -%>
+<script>
+   $("form").jCryption( {getKeysURL:"/rsakey"});
+</script> </code></pre>
 
 Issues:
 
@@ -117,3 +152,16 @@ specified input fields (pass unencrypted).
 Here is the call to jCryption using a modified version:
 
 	$(FORMSELECTOR).jCryption( {getKeysURL:"/rsakey", dontEncryptSelector:'[name="authenticity_token"]'});
+  
+I found another workaround for this issue that can be used until I can get an official version of jCryption with the needed changes.
+
+(http://stackoverflow.com/questions/1201901/rails-invalid-authenticity-token-after-deploy)
+
+You can turn off checking for the "authenticity_token" on your whole app by adding this to config/environment.rb
+  config.action_controller.allow_forgery_protection = false
+
+You can turn it off a single controller using
+  skip_before_filter :verify_authenticity_token
+
+or turn it on
+  protect_from_forgery :except => :index
