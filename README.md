@@ -44,7 +44,7 @@ Installation Instructions
 
 Install the rsa-form plugin:
 
-  ./script/plugin install git://github.com/rsepulveda2/rsa-form.git
+    ./script/plugin install git://github.com/rsepulveda2/rsa-form.git
 
 Download [jquery.js](http://docs.jquery.com/Downloading_jQuery) and 
 [jquery.jcryption.js](http://www.jcryption.org/) then put them in your /public/javascripts/ folder.
@@ -116,9 +116,9 @@ Remember to add this line to your controller:
 Customize the look and feel of each widget
 ========
 
-- Changing it's css file: /stylesheets/rsa-form.css
+- Change it's css file: /stylesheets/rsa-form.css
 
-- Replacing the graphics for the keypad. The following files can be replaced: /images/(0.png - 9.png, clr.png, del.png)
+- Replace the graphics for the keypad. The following files can be replaced: /images/(0.png - 9.png, clr.png, del.png)
 
 - Rewrite the widget's html.
   Copy the /vendor/plugins/rsa-form/app/views/rsa_form directory to your /app/views directory.
