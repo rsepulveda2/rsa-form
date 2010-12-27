@@ -6,8 +6,8 @@ Rsa-form is a Ruby on Rails plugin that allows you to send RSA encrypted form da
 your server. This plugin is useful when submitting sensitive data such as login credentials when your server 
 doesn't have SSL. Please note that Rsa-form is NOT a replacement for SSL since it doesn't use authentication.
 
-Rsa-form also includes a login widget that can be added to your login page to reduce the chance of a keylogger 
-capturing your password (see below for details).
+Rsa-form also includes login/registration and keypad partials/widgets that can be added to your pages to reduce the 
+chance of a keylogger capturing your passwords (see below for details).
 
 Just create a form, then add the following javascript to your page. (Using either "script" tags or
 adding it to one of your javascript files such as /javascripts/application.js)
@@ -77,12 +77,14 @@ less load on your server, you can modify the RSALength constant in /vendor/plugi
 Rsa-form partial's/widget's
 =========================
 
-Rsa-form comes with a premade login, registration and keypad partials.
+Rsa-form comes with premade login, registration and keypad partials. For example:
 
-The Rsa-form login partial can be easily added to your login page. The users password
-is entered using a combination of letters from the keyboard and numbers clicked by the mouse on the numeric keypad. 
-The keypad ordering is changed everytime the page is refreshed. The page can be autorefreshed (on a specified time period)
-if desired. This widget will also use the RSA encryption (as explained above) to add additional safety.
+<img src="http://macdevshop.com/images/login.tiff" /> 
+
+These Rsa-form partials can be easily added to your webpages. The users password
+is entered using a combination of letters from the keyboard and numbers clicked on the numeric keypad. 
+The keypad ordering is changed everytime the page is refreshed and the page can be autorefreshed if desired.
+The widget also uses RSA encryption (as explained above) for added security.
 
 To add the login widget to your login webpage, include the following line:
 
@@ -92,22 +94,24 @@ To add the registration widget to your registration webpage, include the followi
   
     <%= render :partial => 'rsa_form/register' %>
   
-To add a standalone keypad partials, include the following
+To add a standalone keypad partial, include one or both of the following (input tag name specified)
 
-    <%= render :partial => 'rsa_form/password1', :locals => { :name => "user[password]"}  %></p>
+    <%= render :partial => 'rsa_form/password1', :locals => { :name => "user[password]"}  %>
+    <%= render :partial => 'rsa_form/password2', :locals => { :name => "user[password_confirmation]"}  %>
 
-or  
+or if you wish to use the default names ("password" or "password_confirmation")
 
     <%= render :partial => 'rsa_form/password1' %>
+    <%= render :partial => 'rsa_form/password2' %>
 
 Add the following to your html header (application.html.erb):
 
 	<link href="/stylesheets/rsa-form.css" media="screen" rel="stylesheet" type="text/css" /> 
 	<script src="/javascripts/rsa-form.js" type="text/javascript"></script> 
 
-And thats about it. Your controller will receive the data as:
+Your controller will receive the data as:
 
-	params[:login] and params[:password]
+	params[:login] and params[:password] and params[:password_confirmation]
 
 Remember to add this line to your controller:
 
