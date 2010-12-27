@@ -40,6 +40,8 @@ module RsaForm
           else
             params[matches[1]].merge!({ matches[2] => v.to_s })
           end
+        else
+          params[k] = v
         end
       end
     
