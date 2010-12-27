@@ -1,6 +1,6 @@
 Rsa-Form																																						
 ========
-Last Updated: 12/26/10
+Last Updated: 12/27/10
 
 Rsa-form is a Ruby on Rails plugin that allows you to send RSA encrypted form data between your client's browser and 
 your server.  This plugin is useful when submitting sensitive data such as login credentials when your server 
@@ -122,26 +122,27 @@ You can customize the look and feel of the login widget by:
   
 Here is an example of using the individual keypad partials
  
-<pre><code><% form_tag users_path,:id=>"rsa_register_form" do -%>
+    <% form_tag users_path,:id=>"rsa_register_form" do -%>
 
-  <%= label_tag 'login' %>
-  <%= text_field_tag 'user[login]' %>
+      <%= label_tag 'login' %>
+      <%= text_field_tag 'user[login]' %>
 
-  <%= label_tag 'email' %>
-  <%= text_field_tag 'user[email]' %>
+      <%= label_tag 'email' %>
+      <%= text_field_tag 'user[email]' %>
 
-  <%= label_tag 'password' %>
-  <%= render :partial => 'rsa_form/password1', :locals => { :name => "user[password]"}  %>
+      <%= label_tag 'password' %>
+      <%= render :partial => 'rsa_form/password1', :locals => { :name => "user[password]"}  %>
 
-  <%= label_tag 'password_confirmation' %>
-  <%= render :partial => 'rsa_form/password2', :locals => { :name => "user[password_confirmation]"} %>
+      <%= label_tag 'password_confirmation' %>
+      <%= render :partial => 'rsa_form/password2', :locals => { :name => "user[password_confirmation]"} %>
 
-  <%= submit_tag 'Sign up' %>
-<% end -%>
-<script>
-   $("form").jCryption( {getKeysURL:"/rsakey"});
-</script> </code></pre>
+      <%= submit_tag 'Sign up' %>
+    <% end -%>
 
+    <script>
+       $("form").jCryption( {getKeysURL:"/rsakey"});
+    </script>
+    
 Issues:
 
 There is a problem with the login widget and the restful-authentication plugin. The restful plugin doesn't like its
@@ -153,15 +154,15 @@ Here is the call to jCryption using a modified version:
 
 	$(FORMSELECTOR).jCryption( {getKeysURL:"/rsakey", dontEncryptSelector:'[name="authenticity_token"]'});
   
-I found another workaround for this issue that can be used until I can get an official version of jCryption with the needed changes.
+I found another workaround this issue until I can get an official version of jCryption with my needed changes.
 
 (http://stackoverflow.com/questions/1201901/rails-invalid-authenticity-token-after-deploy)
 
 You can turn off checking for the "authenticity_token" on your whole app by adding this to config/environment.rb
-  config.action_controller.allow_forgery_protection = false
+config.action_controller.allow_forgery_protection = false
 
 You can turn it off a single controller using
-  skip_before_filter :verify_authenticity_token
+skip_before_filter :verify_authenticity_token
 
 or turn it on
-  protect_from_forgery :except => :index
+protect_from_forgery :except => :index
