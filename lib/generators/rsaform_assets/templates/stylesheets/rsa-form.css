@@ -1,8 +1,8 @@
 #rsa_login_form { border:2px solid red; width:200px; padding:10px; }
 #rsa_username {}
 
-#rsa_keyboard { background:blue; }
-#rsa_password {}
-img.pbutton {}
+#rsa_keyboard, #rsa_keyboard2 { background:blue; }
+#rsa_password, #rsa_password2 {}
+img.pbutton, img.pbutton2 { width:40px; }
 
 #rsa_loginButton {}
