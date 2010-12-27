@@ -1,11 +1,10 @@
 Rsa-Form																																						
 ========
-Last Update: 12/26/10
+Last Updated: 12/26/10
 
 Rsa-form is a Ruby on Rails plugin that allows you to send RSA encrypted form data between your client's browser and 
-your server.  This plugin can be useful when submitting sensitive data such as login credentials and your server 
-doesn't have SSL. 
-Please note that Rsa-form is NOT a replacement for SSL since it doesn't use authentication.
+your server.  This plugin is useful when submitting sensitive data such as login credentials when your server 
+doesn't have SSL. Please note that Rsa-form is NOT a replacement for SSL since it doesn't use authentication.
 
 Rsa-form also includes a login widget that can be added to your login page to reduce the chance of a keylogger 
 capturing your password (see below for details).
@@ -20,7 +19,7 @@ adding it to one of your javascript files such as /javascripts/application.js)
 where myencryptedform is the id tag associated with your form
 
 When the user submit's the form, the browser will request an RSA public key from the server. jCryption will then encrypt 
-the form data using the RSA key and return the data to the server.
+the serialized form data using the RSA key and return the encrypted data to the server.
 
 To decode the data on the server side, make the following call in your controller:
 
@@ -29,10 +28,10 @@ To decode the data on the server side, make the following call in your controlle
 This decodes the form data and adds it to your params hash. Your controller will work just as before.
 
 How does it work?
-the jCryption plugin does most of the heavy lifting on the browser side. When the user submits the form, jCryption
+The jCryption plugin does most of the heavy lifting on the browser side. When the user submits the form, jCryption
 is notified of the submit and will make an AJAX request for a RSA public key from your server (/rsakey).
 The server will generate a new public/private key pair using the RSA gem and store the key_pair in the users session 
-hash. It returns the public key to the client. The client will serialize the form data then
+hash. It then returns the public RSA key to the client/browser. The client will serialize the form data then
 encrypt it using the public key. The form is returned to the server using a single param 'jCryption'. The controller 
 decrypts the form data using RsaForm.decrypt_form() utilizing the stored RSA key pair. An additional checksum is 
 performed on the data to verify that the data hasn't changed during transfer.
@@ -42,12 +41,12 @@ unencrypted mode.
 
 **Installation instructions:**
 
-install the rsa-form plugin:
+Install the rsa-form plugin:
 
   ./script/plugin install git://github.com/rsepulveda2/rsa-form.git
 
 Download [jquery.js](http://docs.jquery.com/Downloading_jQuery) and 
-[jquery.jcryption.js](http://www.jcryption.org/) then put them in your /public/javascripts/ folder
+[jquery.jcryption.js](http://www.jcryption.org/) then put them in your /public/javascripts/ folder.
 
 Add the following lines to your application.html.erb:
 
@@ -58,15 +57,13 @@ or the equivalent
 
 	<%= javascript_include_tag "jquery-1.4.2", "jquery.jcryption-1.1", "application" %>
 
-Install the RSA ruby gem:
-
-add the following line to your /config/environment.rb:
+Install the RSA ruby gem by adding the following line to your /config/environment.rb:
 
 	config.gem "rsa"
 
 stop your server
 
-	rake gems:install
+	shell% rake gems:install
 
 restart your server
 
@@ -74,11 +71,11 @@ Rsa-form login widget
 =========================
 
 The Rsa-form login widget can be added to your login page as a partial. The users password
-is entered using a combination of letters on the keyboard and numbers on a mouse driven numeric keypad. 
+is entered using a combination of letters from the keyboard and numbers clicked by the mouse on the numeric keypad. 
 The keypad ordering is changed everytime the page is refreshed. The page can be autorefreshed (on a specified time period)
-if the website owner desires. This widget will also use the RSA encryption (as explained above) to add additional safety.
+if desired. This widget will also use the RSA encryption (as explained above) to add additional safety.
 
-To include the login widget to your login webpage, add the following line:
+To add the login widget to your login webpage, include the following line:
 
 	<%= render :partial => 'rsa_form/login' %>
 
@@ -97,7 +94,7 @@ Remember to add this line to your controller:
 
 You can customize the look and feel of the login widget by:
 
-- Changing the css file: /stylesheets/rsa-form.css
+- Changing it's css file: /stylesheets/rsa-form.css
 
 - Replacing the graphics for the keypad. The following files can be replaced: /images/(0.png - 9.png, clr.png, del.png)
 
@@ -106,7 +103,7 @@ You can customize the look and feel of the login widget by:
 
 	Make modifications to the /app/views/rsa_form/_login.html.erb file.
 
-	To avoid breaking the javascript, don't modify the "img" tags, and 
+	To avoid breaking the javascript, don't modify the "img" elements, and 
 	don't change the id attribute of the password text field tag and the 
 	form tag.
 
