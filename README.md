@@ -79,7 +79,7 @@ Rsa-form partial's/widget's
 
 Rsa-form comes with premade login, registration and keypad partials. For example:
 
-<img src="http://macdevshop.com/images/login.tiff" /> 
+<img src="http://macdevshop.com/images/login.jpg" /> 
 
 These Rsa-form partials can be easily added to your webpages. The users password
 is entered using a combination of letters from the keyboard and numbers clicked on the numeric keypad. 
@@ -122,7 +122,7 @@ Customize the look and feel of each widget
 
 - Change it's css file: /stylesheets/rsa-form.css
 
-- Replace the graphics for the keypad. The following files can be replaced: /images/(0.png - 9.png, clr.png, del.png)
+- Replace the graphics for the key's in the keypad. The following files can be replaced: /images/(0.png - 9.png, clr.png, del.png)
 
 - Rewrite the widget's html.
   Copy the /vendor/plugins/rsa-form/app/views/rsa_form directory to your /app/views directory.
