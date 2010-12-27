@@ -1,3 +1,5 @@
+require 'cgi'
+
 module RsaForm
   def self.included(base)
     base.extend ClassMethods
@@ -15,7 +17,7 @@ module RsaForm
       dstr = decrypt( encstr, key_pair.private_key.exponent, key_pair.public_key.modulus) 
 
       url = dstr[2..-1]
-#			puts "decode = [%s] url [%s] checksum [%s]" % [dstr, url, dstr[0,2]]
+			puts "decode = [%s] url [%s] checksum [%s]" % [dstr, url, dstr[0,2]]
 
       sum = 0
       url.each_byte { |b| sum += b.to_i }
@@ -24,16 +26,24 @@ module RsaForm
 #				puts "checksum mismatch, expected " + dstr[0,2] + " received " + ("%x" % [sum & 0xff])
         return nil
       end
-
+      
+      cparms = CGI.parse(url)
+       
       params = {}
-      kparms = url.split('&')
-      kparms.each { |p|
-        p2 = p.split("=")						
-        params[ p2[0]] = CGI::unescape(p2[1]) if p2.length == 2
-        params[ p2[0]] = "" if p2.length == 1			
-      }	
-
-      params
+      cparms.each do |k,v|
+#       puts "for k %s v %s" % [k, v.to_s]
+        matches = k.match(/([^\[]+)\[([^\]]+)\]/)
+        
+        if matches
+          if !params[matches[1]]
+            params[matches[1]] = { matches[2] => v.to_s } 
+          else
+            params[matches[1]].merge!({ matches[2] => v.to_s })
+          end
+        end
+      end
+    
+      params.symbolize_keys!
     end
 
     def RsaForm.decrypt( encrypted, dec_key, enc_mod) 
