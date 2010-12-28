@@ -12,17 +12,17 @@ chance of a keylogger capturing your passwords (see below for details).
 Just create a form, then add the following javascript to your page. (Using either "script" tags or
 adding it to one of your javascript files such as /javascripts/application.js)
 
-	jQuery(document).ready(function() {
-		$("#myencryptedform").jCryption( {getKeysURL:"/rsakey"});
-	});
+    jQuery(document).ready(function() {
+      $("#myencryptedform").jCryption( {getKeysURL:"/rsakey"});
+    });
 
 where myencryptedform is the id tag associated with your form
 
 Or use:
 
-  jQuery(document).ready(function() {
-		$("#myencryptedform").jCryption( {getKeysURL:"/rsakey", beforeEncryption:validate_inputs});
-	});
+    jQuery(document).ready(function() {
+      $("#myencryptedform").jCryption( {getKeysURL:"/rsakey", beforeEncryption:validate_inputs});
+    });
   
 if you wish to validate the form inputs with your browser prior to submission. This can reduce server load 
 since the client will not contact the server until all inputs are validated. Rsa-form also includes several 
@@ -166,9 +166,9 @@ Additional notes
 - The default RSA key length is 128 bits. If you wish to change this to something else for added security or
 less load on your server, you can modify the RSALength constant in /vendor/plugins/rsa-form/app/controllers/rsakey_controller.rb
 
-- The partial inputs are validated by the browser prior to submission to the server. You may want to modify the default password/login name
-constraints to fit your website. Currently, the default password contraints are: 6 characters minimum, at least 1 alpha and at least 1 numeric
-character. See /javascripts/rsa-form.js in routine validate_inputs() for more details.
+- The widgets/partials are validated by the browser prior to submission to the server. You may want to modify the default password/login name
+constraints to fit your website. Currently, the default password contraints are: 6 characters minimum, at least 1 alpha character, 
+and at least 1 numeric character. See /javascripts/rsa-form.js in routine validate_inputs() for more details.
     
 Issues
 ========
