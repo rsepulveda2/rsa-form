@@ -158,12 +158,13 @@ Customize the look and feel of each widget
 Issues
 ========
 
-There is a problem with the login widget and the restful-authentication plugin. The restful plugin doesn't like its
-hidden input field, name="authenticity_token" to be encrypted then decrypted. It will flag an authenticity_token
-error. The only way that I have found to work around the problem is by modifying the jCryption jquery plugin to ignore
-specified input fields (pass unencrypted).
+There is a problem with rsa-form and the Rails Controller base class (ActiveController) if the site has forgery_protection enabled. 
+ActiveController doesn't like its hidden input field, name="authenticity_token" to be encrypted then decrypted. 
+It will flag an authenticity_token error. The only way that I have found to work around the problem is by modifying 
+the jCryption jquery plugin to ignore this input tag and pass it through unencrypted.
 
-I found another workaround for this issue which will work until I can get an official version of jCryption with the needed changes.
+I found another temporary workaround for this issue which will work until I can get an official version of jCryption 
+with the needed changes.
 
 [http://stackoverflow.com/questions/1201901/rails-invalid-authenticity-token-after-deploy](http://stackoverflow.com/questions/1201901/rails-invalid-authenticity-token-after-deploy)
 
@@ -171,10 +172,10 @@ You can turn off checking for the "authenticity_token" on your whole app by addi
 
     config.action_controller.allow_forgery_protection = false
 
-You can turn it off a single controller using
+You can turn it off in a single controller using:
 
     skip_before_filter :verify_authenticity_token
 
-or turn it on
+or turn it on with:
 
     protect_from_forgery :except => :index
