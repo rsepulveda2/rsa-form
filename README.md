@@ -18,8 +18,19 @@ adding it to one of your javascript files such as /javascripts/application.js)
 
 where myencryptedform is the id tag associated with your form
 
+Or use:
+
+  jQuery(document).ready(function() {
+		$("#myencryptedform").jCryption( {getKeysURL:"/rsakey", beforeEncryption:validate_inputs});
+	});
+  
+if you wish to validate the form inputs with your browser prior to submission. This can reduce server load 
+since the client will not contact the server until all inputs are validated. Rsa-form also includes several 
+javascript routines which can be used to test password, string, URL, and e-mail address validity. See 
+/javascripts/rsa-form.js for more details.
+
 When the user submit's the form, the browser will request an RSA public key from the server. jCryption will then encrypt 
-the serialized form data using the RSA key and return the encrypted data to the server.
+the serialized form data using the RSA public key and return the encrypted data to the server.
 
 To decode the data on the server side, make the following call in your controller:
 
@@ -67,12 +78,6 @@ stop your server
 	shell% rake gems:install
 
 restart your server
-
-Additional notes
-========
-
-- The default RSA key length is 128 bits. If you wish to change this to something else for added security or
-less load on your server, you can modify the RSALength constant in /vendor/plugins/rsa-form/app/controllers/rsakey_controller.rb
 
 Rsa-form partial's/widget's
 =========================
@@ -152,8 +157,18 @@ Customize the look and feel of each widget
     <% end -%>
 
     <script>
-       $("form").jCryption( {getKeysURL:"/rsakey"});
+       $("form").jCryption( {getKeysURL:"/rsakey", beforeEncryption:validate_inputs});       
     </script>
+    
+Additional notes
+========
+
+- The default RSA key length is 128 bits. If you wish to change this to something else for added security or
+less load on your server, you can modify the RSALength constant in /vendor/plugins/rsa-form/app/controllers/rsakey_controller.rb
+
+- The partial inputs are validated by the browser prior to submission to the server. You may want to modify the default password/login name
+constraints to fit your website. Currently, the default password contraints are: 6 characters minimum, at least 1 alpha and at least 1 numeric
+character. See /javascripts/rsa-form.js in routine validate_inputs() for more details.
     
 Issues
 ========
@@ -163,8 +178,7 @@ ActiveController doesn't like its hidden input field, name="authenticity_token" 
 It will flag an authenticity_token error. The only way that I have found to work around the problem is by modifying 
 the jCryption jquery plugin to ignore this input tag and pass it through unencrypted.
 
-I found another temporary workaround for this issue which will work until I can get an official version of jCryption 
-with the needed changes.
+I found a temporary workaround for this issue until I can get an official version of jCryption which includes the needed changes.
 
 [http://stackoverflow.com/questions/1201901/rails-invalid-authenticity-token-after-deploy](http://stackoverflow.com/questions/1201901/rails-invalid-authenticity-token-after-deploy)
 
