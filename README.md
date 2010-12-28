@@ -1,12 +1,12 @@
 Rsa-Form																																						
 ========
-Last Updated: 12/27/10
+Last Updated: 12/28/10
 
 Rsa-form is a Ruby on Rails plugin that allows you to send RSA encrypted form data between your client's browser and 
 your server. This plugin is useful when submitting sensitive data such as login credentials when your server 
 doesn't have SSL. Please note that Rsa-form is NOT a replacement for SSL since it doesn't use authentication.
 
-Rsa-form also includes login/registration and keypad partials/widgets that can be added to your pages to reduce the 
+Rsa-form also includes login/registration and keypad partials that can be added to your pages to reduce the 
 chance of a keylogger capturing your passwords (see below for details).
 
 Just create a form, then add the following javascript to your page. (Using either "script" tags or
@@ -89,7 +89,7 @@ Rsa-form comes with premade login, registration and keypad partials. For example
 These Rsa-form partials can be easily added to your webpages. The users password
 is entered using a combination of letters from the keyboard and numbers clicked on the numeric keypad. 
 The keypad ordering is changed everytime the page is refreshed and the page can be autorefreshed if desired.
-The widget also uses RSA encryption (as explained above) for added security.
+The widget will be submitted using RSA encryption (as explained above) for added security.
 
 To add the login widget to your login webpage, include the following line:
 
@@ -99,12 +99,12 @@ To add the registration widget to your registration webpage, include the followi
   
     <%= render :partial => 'rsa_form/register' %>
   
-To add a standalone keypad partial, include one or both of the following (input tag name specified)
+To add a standalone keypad partial, include one or both of the following lines: (Note: the tag name can be specified)
 
     <%= render :partial => 'rsa_form/password1', :locals => { :name => "user[password]"}  %>
     <%= render :partial => 'rsa_form/password2', :locals => { :name => "user[password_confirmation]"}  %>
 
-or if you wish to use the default names ("password" or "password_confirmation")
+or if you wish to use the default tag names ("password" and "password_confirmation" respectively)
 
     <%= render :partial => 'rsa_form/password1' %>
     <%= render :partial => 'rsa_form/password2' %>
@@ -114,7 +114,7 @@ Add the following to your html header (application.html.erb):
 	<link href="/stylesheets/rsa-form.css" media="screen" rel="stylesheet" type="text/css" /> 
 	<script src="/javascripts/rsa-form.js" type="text/javascript"></script> 
 
-Your controller will receive the data as:
+Your controller will receive the data as: (depending on which partial that you are using)
 
 	params[:login] and params[:password] and params[:password_confirmation]
 
@@ -132,12 +132,12 @@ Customize the look and feel of each widget
 - Rewrite the widget's html.
   Copy the /vendor/plugins/rsa-form/app/views/rsa_form directory to your /app/views directory.
 
-	Make modifications to the /app/views/rsa_form/_login.html.erb file.
+	Make modifications to the /app/views/rsa_form/_login.html.erb file or the /app/views/rsa_form/_register.html.erb
 
 	To avoid breaking the javascript, don't modify the "img" elements, and 
 	don't change the id attribute of the password text field tag.
   
-#### Here is an example of using the individual keypad partials
+#### Here is an example of a custom registration webpage using the keypad partials
  
     <% form_tag users_path,:id=>"rsa_register_form" do -%>
 
@@ -212,7 +212,7 @@ Additional notes
 less load on your server, you can modify the RSALength constant in /vendor/plugins/rsa-form/app/controllers/rsakey_controller.rb
 
 - The widgets/partials are validated by the browser prior to submission to the server. You may want to modify the default password/login name
-constraints to fit your website. Currently, the default password contraints are: 6 characters minimum, at least 1 alpha character, 
+constraints to fit your website. Currently, the default password constraints are: 6 characters minimum, at least 1 alpha character, 
 and at least 1 numeric character. See /javascripts/rsa-form.js in routine validate_inputs() for more details.
         
 Issues
