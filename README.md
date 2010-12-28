@@ -167,9 +167,9 @@ Say that I want to submit a form to the server using a post request to the same 
 as normal but using AJAX. I want the controller to return javascript that will be executed by the client. 
 (Such as displaying an alert or modifying the DOM on the clients browser)
 
-- Add the following javascript to your html or to a javascript file such as /javascripts/aplication.js
-PLEASE NOTE: Make sure that you add this code AFTER the call to $(form).jCryption();. If you don't,
-then this routine will submit the normal unencrypted data.
+- Add the following javascript to your html or to a javascript file such as /javascripts/application.js
+IMPORTANT: Make sure that you add this code AFTER the call to $(form).jCryption();. If you don't,
+then this routine will be executed first and submit the normal unencrypted data.
 
 <pre><code>$("#rsa_login_form").submit( function (){
   $.post( $(this).attr("action"), $(this).serialize(), null, 'script');
