@@ -179,21 +179,21 @@ then this routine will submit the normal unencrypted data.
 2. Add code to your controller to differentiate between a normal GET/POST action's and
 an AJAX GET/POST action. For example:
 
-    respond_to do |format|
-      format.html {	redirect_back_or_default('/') } # normally execute this redirect
-      format.js   { @route = "/" }                  # setup a variable that will be used in the javascript view
-    end
+     respond_to do |format|
+       format.html {	redirect_back_or_default('/') } # normally execute this redirect
+       format.js   { @route = "/" }                  # setup a variable that will be used in the javascript view
+     end
     
 3. Make sure that you create a view that will be returned from the AJAX request.
   
     Assuming that we are using a controller called 'session' and an action named 'create', create this file:
   
-      /app/views/session/create.js.erb
+     /app/views/session/create.js.erb
   
     That contains some javascript that will be executed on the client, for example:
   
-      alert("You are successfully logged in");  // displays an alert
-      document.location = "{%=@route%}";        // does a redirect to the specified route
+     alert("You are successfully logged in");  // displays an alert
+     document.location = "{%=@route%}";        // does a redirect to the specified route
       
 And that's about it!
     
