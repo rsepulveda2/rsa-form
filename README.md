@@ -167,33 +167,37 @@ Say that I want to submit a form to the server using a post request to the same 
 as normal but using AJAX. I want the controller to return javascript that will be executed by the client. 
 (Such as displaying an alert or modifying the DOM on the clients browser)
 
-1. Add the following javascript to your html or to a javascript file such as /javascripts/aplication.js
+- Add the following javascript to your html or to a javascript file such as /javascripts/aplication.js
 PLEASE NOTE: Make sure that you add this code AFTER the call to $(form).jCryption();. If you don't,
 then this routine will submit the normal unencrypted data.
 
-     $("#rsa_login_form").submit( function (){
-       $.post( $(this).attr("action"), $(this).serialize(), null, 'script');
-       return false;
-     });    
+<pre><code>$("#rsa_login_form").submit( function (){
+  $.post( $(this).attr("action"), $(this).serialize(), null, 'script');
+  return false;
+});    
+</code></pre> 
 
-2. Add code to your controller to differentiate between a normal GET/POST action's and
+- Add code to your controller to differentiate between a normal GET/POST action and
 an AJAX GET/POST action. For example:
 
-     respond_to do |format|
-       format.html {	redirect_back_or_default('/') } # normally execute this redirect
-       format.js   { @route = "/" }                  # setup a variable that will be used in the javascript view
-     end
-    
-3. Make sure that you create a view that will be returned from the AJAX request.
+<pre><code>respond_to do |format|
+  format.html { redirect_back_or_default('/') } # normally execute this redirect
+  format.js   { @route = "/" }                  # setup a variable that will be used in the javascript view
+end
+</code></pre> 
+   
+- Create a view that will be returned from the AJAX request.
   
-    Assuming that we are using a controller called 'session' and an action named 'create', create this file:
+Assuming that we are using a controller called 'session' and an action named 'create', create this file:
   
-     /app/views/session/create.js.erb
+<pre><code>/app/views/session/create.js.erb
+</code></pre> 
   
-    That contains some javascript that will be executed on the client, for example:
+That contains some javascript that will be executed on the client, for example:
   
-     alert("You are successfully logged in");  // displays an alert
-     document.location = "{%=@route%}";        // does a redirect to the specified route
+<pre><code>alert("You are successfully logged in");  // displays an alert
+document.location = "{%=@route%}";        // does a redirect to the specified route
+</code></pre> 
       
 And that's about it!
     
