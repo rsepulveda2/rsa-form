@@ -1,6 +1,6 @@
 Rsa-Form																																						
 ========
-Last Updated: 12/28/10
+Last Updated: 1/7/11
 
 Rsa-form is a Ruby on Rails plugin that allows you to send RSA encrypted form data between your client's browser and 
 your server. This plugin is useful when submitting sensitive data such as login credentials when your server 
@@ -58,7 +58,7 @@ Install the rsa-form plugin:
     ./script/plugin install git://github.com/rsepulveda2/rsa-form.git
 
 Download [jquery.js](http://docs.jquery.com/Downloading_jQuery) and 
-[jquery.jcryption.js](http://www.jcryption.org/) then put them in your /public/javascripts/ folder.
+[jquery.jcryption.js](http://github.com/HazAT/jCryption) then put them in your /public/javascripts/ folder.
 
 Add the following lines to your application.html.erb:
 
@@ -163,13 +163,13 @@ Customize the look and feel of each widget
 Submitting your encrypted form's using AJAX
 ========
 
-Say that I want to submit a form to the server using a post request to the same controller and action
-as normal but using AJAX. I want the controller to return javascript that will be executed by the client. 
-(Such as displaying an alert or modifying the DOM on the clients browser)
+Say that I want to submit an encrypted form to the server using a post request to the same controller and action
+as normal but using AJAX. I want the controller to return javascript that will be executed by the browser. 
+(Such as displaying an alert or modifying the DOM.)
 
 - Add the following javascript to your html or to a javascript file such as /javascripts/application.js
 IMPORTANT: Make sure that you add this code AFTER the call to $(form).jCryption();. If you don't,
-then this routine will be executed first and submit the normal unencrypted data.
+then this routine will be executed first and submit normal unencrypted data.
 
 <pre><code>$("#rsa_login_form").submit( function (){
   $.post( $(this).attr("action"), $(this).serialize(), null, 'script');
@@ -218,23 +218,4 @@ and at least 1 numeric character. See /javascripts/rsa-form.js in routine valida
 Issues
 ========
 
-There is a problem with rsa-form and the Rails Controller base class (ActiveController) if the site has forgery_protection enabled. 
-ActiveController doesn't like its hidden input field, name="authenticity_token" to be encrypted then decrypted. 
-It will flag an authenticity_token error. The only way that I have found to work around the problem is by modifying 
-the jCryption jquery plugin to ignore this input tag and pass it through unencrypted.
-
-I found a temporary workaround for this issue until I can get an official version of jCryption which includes the needed changes.
-
-[http://stackoverflow.com/questions/1201901/rails-invalid-authenticity-token-after-deploy](http://stackoverflow.com/questions/1201901/rails-invalid-authenticity-token-after-deploy)
-
-You can turn off checking for the "authenticity_token" on your whole app by adding this to config/environment.rb
-
-    config.action_controller.allow_forgery_protection = false
-
-You can turn it off in a single controller using:
-
-    skip_before_filter :verify_authenticity_token
-
-or turn it on with:
-
-    protect_from_forgery :except => :index
+None at this time
