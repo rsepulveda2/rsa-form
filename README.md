@@ -13,7 +13,7 @@ Just create a form, then add the following javascript to your page. (Using eithe
 adding it to one of your javascript files such as /javascripts/application.js)
 
     jQuery(document).ready(function() {
-      $("#myencryptedform").jCryption( {getKeysURL:"/rsakey"});
+      $("#myencryptedform").jCryption( {getKeysURL:"/rsakey",formFieldSelector:':input:not([name=authenticity_token])'});
     });
 
 where myencryptedform is the id tag associated with your form
@@ -21,7 +21,8 @@ where myencryptedform is the id tag associated with your form
 Or use:
 
     jQuery(document).ready(function() {
-      $("#myencryptedform").jCryption( {getKeysURL:"/rsakey", beforeEncryption:validate_inputs});
+      $("#myencryptedform").jCryption( {getKeysURL:"/rsakey",formFieldSelector:':input:not([name=authenticity_token])', 
+        beforeEncryption:validate_inputs});
     });
   
 if you wish to validate the form inputs with your browser prior to submission. This can reduce server load 
@@ -63,11 +64,11 @@ Download [jquery.js](http://docs.jquery.com/Downloading_jQuery) and
 Add the following lines to your application.html.erb:
 
 	<script src="/javascripts/jquery-1.4.4.js" type="text/javascript"></script> 
-	<script src="/javascripts/jquery.jcryption-1.1.js" type="text/javascript"></script> 
+	<script src="/javascripts/jquery.jcryption.js" type="text/javascript"></script> 
 
 or the equivalent 
 
-	<%= javascript_include_tag "jquery-1.4.2", "jquery.jcryption-1.1", "application" %>
+	<%= javascript_include_tag "jquery-1.4.2", "jquery.jcryption", "application" %>
 
 Install the RSA ruby gem by adding the following line to your /config/environment.rb:
 
@@ -157,7 +158,8 @@ Customize the look and feel of each widget
     <% end -%>
 
     <script>
-       $("form").jCryption( {getKeysURL:"/rsakey", beforeEncryption:validate_inputs});       
+       $("form").jCryption( {getKeysURL:"/rsakey",formFieldSelector:':input:not([name=authenticity_token])',
+         beforeEncryption:validate_inputs});       
     </script>
     
 Submitting your encrypted form's using AJAX
